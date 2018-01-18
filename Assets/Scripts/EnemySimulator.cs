@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemySimulator : RigidBodySimulation
 {
     private Rigidbody rigidbody;
     public bool forward = false;
@@ -14,13 +14,8 @@ public class EnemyController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         movementController = new MovementController(rigidbody, transform);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void Proceed()
+    public override void Proceed(AbstractActorState state, ControlInput? input)
     {
         movementController.Move(forward ? 1 : -1, 0);
     }

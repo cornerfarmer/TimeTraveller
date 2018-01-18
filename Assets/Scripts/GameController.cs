@@ -6,10 +6,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject prefab;
     public GameObject alphaWall;
-    public GameObject prefabArrow;
-    public GameObject prefabStopArrow;
     public GameObject activeTimeFrames;
     public GameObject player;
     public Simulator simulator;
@@ -33,7 +30,7 @@ public class GameController : MonoBehaviour
         map.transform.localScale = new Vector3(1, 1, maxTimeSteps / 4.0f);
 	    map.transform.Find("Finish").GetComponent<Renderer>().material.mainTextureScale = new Vector2(maxTimeSteps / 4.0f, 1);
 
-        simulator = new Simulator(prefab, prefabArrow, prefabStopArrow, activeTimeFrames, player, finish, maxTimeSteps);
+        simulator = new Simulator(activeTimeFrames, player, finish, maxTimeSteps);
 	    simulator.Simulate(0);
     }
 	

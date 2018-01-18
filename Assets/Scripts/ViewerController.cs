@@ -8,7 +8,7 @@ public class ViewerController : MonoBehaviour
     public GameObject gameController;
     private MovementController movementController;
 
-    private PlayerController markedCube;
+    private TimeFrameController markedCube;
 
     private bool cubeIsLocked;
     private bool movementActive;
@@ -57,17 +57,17 @@ public class ViewerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                simulator.SetInput(Int32.Parse(markedCube.name), Simulator.ControlInput.Forward);
+                simulator.SetInput(Int32.Parse(markedCube.name), ControlInput.Forward);
                 successful = true;
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                simulator.SetInput(Int32.Parse(markedCube.name), Simulator.ControlInput.Backward);
+                simulator.SetInput(Int32.Parse(markedCube.name), ControlInput.Backward);
                 successful = true;
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                simulator.SetInput(Int32.Parse(markedCube.name), Simulator.ControlInput.Jump);
+                simulator.SetInput(Int32.Parse(markedCube.name), ControlInput.Jump);
                 successful = true;
             }
 
@@ -107,9 +107,9 @@ public class ViewerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 2))
             {
-                PlayerController controller = hit.collider.gameObject.GetComponent<PlayerController>();
+                TimeFrameController controller = hit.collider.gameObject.GetComponent<TimeFrameController>();
 
-                if (controller != null)
+                if (controller != null && !controller.locked)
                 {
                     if (markedCube != controller)
                     {

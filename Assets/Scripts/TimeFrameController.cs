@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class TimeFrameController : MonoBehaviour
 {
     private Renderer renderer;
 
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 transitionDestination;
     private Vector3 transitionSource;
+    public bool locked;
 
     public float transitTime = 1;
     // Use this for initialization
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour
 	    renderer = GetComponent<Renderer>();
 	    hasAction = false;
 	    transitionDelta = 1;
-
 	}
 	
 	// Update is called once per frame

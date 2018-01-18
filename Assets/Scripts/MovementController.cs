@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController 
+public class MovementController
 {
     private Rigidbody rigidbody;
     private Transform transform;
