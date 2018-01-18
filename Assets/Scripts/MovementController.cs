@@ -29,7 +29,7 @@ public class MovementController
 
     public void Jump()
     {
-        if (Physics.Raycast(transform.position, -Vector3.up, 0.5f))
+        if (Physics.Raycast(transform.position, -Vector3.up, 0.55f))
             rigidbody.AddForce(transform.up * jumpSpeed);
     }
 }
