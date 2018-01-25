@@ -6,29 +6,18 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject alphaWall;
     public GameObject activeTimeFrames;
-    public GameObject player;
+    private GameObject player;
     public Simulator simulator;
-    public GameObject map;
     public GameObject scoreText;
-    public GameObject finish;
-    private int maxTimeSteps;
-    private int mapWidth;
+    private GameObject finish;
+    public int maxTimeSteps = 1000;
     private float buildTime;
 
     void Start ()
 	{
-	    maxTimeSteps = 1000;
-	    mapWidth = 23;
-
-        Instantiate(alphaWall, new Vector3(0, 0, 0), Quaternion.identity).transform.localScale = new Vector3(mapWidth, 10, 1);
-	    Instantiate(alphaWall, new Vector3(-0.5f, 0, 0), Quaternion.Euler(0, 90, 0)).transform.localScale = new Vector3(maxTimeSteps / 4.0f, 10, 1);
-	    Instantiate(alphaWall, new Vector3(mapWidth, 0, 0), Quaternion.Euler(0, 90, 0)).transform.localScale = new Vector3(maxTimeSteps / 4.0f, 10, 1);
-	    Instantiate(alphaWall, new Vector3(0, 0, -maxTimeSteps / 4.0f - 0.5f), Quaternion.identity).transform.localScale = new Vector3(mapWidth, 10, 1);
-
-        map.transform.localScale = new Vector3(1, 1, maxTimeSteps / 4.0f);
-	    map.transform.Find("Finish").GetComponent<Renderer>().material.mainTextureScale = new Vector2(maxTimeSteps / 4.0f, 1);
+	    finish = GameObject.FindWithTag("Finish");
+	    player = GameObject.Find("Player(Clone)");
 
         simulator = new Simulator(activeTimeFrames, player, finish, maxTimeSteps);
 	    simulator.Simulate(0);
