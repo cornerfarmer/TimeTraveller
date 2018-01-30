@@ -340,6 +340,21 @@ namespace SimpleJSON
             }
         }
 
+        public virtual uint AsUInt
+        {
+            get
+            {
+                uint v = 0;
+                if (uint.TryParse(Value, out v))
+                    return v;
+                return 0;
+            }
+            set
+            {
+                Value = value.ToString(CultureInfo.InvariantCulture);
+            }
+        }
+
         public virtual int AsInt
         {
             get { return (int)AsDouble; }

@@ -32,14 +32,14 @@ public class Simulator
     
     class State
     {
-        public Dictionary<GameObject, AbstractActorState> actorStates;
+        public Dictionary<GameObject, EmptyActorState> actorStates;
 
         public State(GameObject[] actors)
         {
-            actorStates = new Dictionary<GameObject, AbstractActorState>();
+            actorStates = new Dictionary<GameObject, EmptyActorState>();
             foreach (GameObject actor in actors)
             {
-                actorStates.Add(actor, actor.GetComponent<AbstractSimulation>().CreateNewState());
+                actorStates.Add(actor, actor.GetComponent<EmptySimulation>().CreateNewState());
             }
         }
 
@@ -131,10 +131,10 @@ public class Simulator
             for (; simPos < endPos; simPos++)
             {
                 State state = states[simPos];
-
+                
                 foreach (GameObject actor in actors)
                 {
-                    actor.GetComponent<AbstractSimulation>().Proceed(state.actorStates[actor], controlInputs.ContainsKey(simPos) ? controlInputs[simPos] : (ControlInput?) null);
+                    actor.GetComponent<EmptySimulation>().Proceed(state.actorStates[actor], controlInputs.ContainsKey(simPos) ? controlInputs[simPos] : (ControlInput?) null, state.actorStates[player] as PlayerActorState);
                 }
 
                 for (int t = 0; t < simulationsPerTimeStep; t++)
@@ -154,7 +154,7 @@ public class Simulator
                         poolGameObject = new GameObject(actor.name + "Pool");
                         poolGameObject.transform.parent = activeTimeFrames.transform;
                     }
-                    actor.GetComponent<AbstractSimulation>().CreateTimeFrame(actor, poolGameObject, simPos, maxTimeSteps, controlInputs.ContainsKey(simPos) ? controlInputs[simPos] : (ControlInput?)null);
+                    actor.GetComponent<EmptySimulation>().CreateTimeFrame(actor, poolGameObject, simPos, maxTimeSteps, controlInputs.ContainsKey(simPos) ? controlInputs[simPos] : (ControlInput?)null);
                 }
                
                 

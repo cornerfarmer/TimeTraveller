@@ -5,17 +5,23 @@ using UnityEngine;
 public class PlayerActorState : RigidBodyActorState
 {
     public ControlInput movementMode = ControlInput.Stop;
+    public bool dead = false;
+    public int coins = 0;
 
-    public override void restore(GameObject actor, AbstractActorState previousState)
+    public override void restore(GameObject actor, EmptyActorState previousState)
     {
         base.restore(actor, previousState);
         movementMode = previousState != null ? (previousState as PlayerActorState).movementMode : ControlInput.Stop;
+        coins = previousState != null ? (previousState as PlayerActorState).coins : 0;
+        actor.SetActive(!dead);
     }
 
-    public override void save(GameObject actor, AbstractActorState previousState)
+    public override void save(GameObject actor, EmptyActorState previousState)
     {
         base.save(actor, previousState);
         movementMode = previousState != null ? (previousState as PlayerActorState).movementMode : ControlInput.Stop;
+        coins = previousState != null ? (previousState as PlayerActorState).coins : 0;
+        dead = !actor.activeSelf;
     }
 }
 
@@ -34,13 +40,14 @@ public class PlayerSimulation : RigidBodySimulation {
         movementController = new MovementController(rigidbody, transform);
     }
 
-    public override AbstractActorState CreateNewState()
+    public override EmptyActorState CreateNewState()
     {
         return new PlayerActorState();
     }
 
-    public override void Proceed(AbstractActorState state, ControlInput? input)
+    public override void Proceed(EmptyActorState state, ControlInput? input, PlayerActorState playerState1)
     {
+        base.Proceed(state, input, playerState1);
         PlayerActorState playerState = state as PlayerActorState;
         
         if (input != null)

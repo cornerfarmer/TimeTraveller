@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     void Start ()
 	{
 	    finish = GameObject.FindWithTag("Finish");
-	    player = GameObject.Find("Player(Clone)");
+	    player = GameObject.Find("Player");
 
         simulator = new Simulator(activeTimeFrames, player, finish, maxTimeSteps);
 	    simulator.Simulate(0);

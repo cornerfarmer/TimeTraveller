@@ -15,8 +15,9 @@ public class EnemySimulator : RigidBodySimulation
         movementController = new MovementController(rigidbody, transform);
     }
 
-    public override void Proceed(AbstractActorState state, ControlInput? input)
+    public override void Proceed(EmptyActorState state, ControlInput? input, PlayerActorState playerState)
     {
+        base.Proceed(state, input, playerState);
         movementController.Move(forward ? 1 : -1, 0);
     }
 }

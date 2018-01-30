@@ -14,11 +14,11 @@ public class MouseLook : MonoBehaviour
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
+        Screen.lockCursor = true;
     }
 
     void Update()
     {
-        Screen.lockCursor = true;
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = -Input.GetAxis("Mouse Y");
 
